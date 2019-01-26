@@ -15,4 +15,8 @@ public class ParentServiceTest {
 
         parentService.test();
     }
+
+    private static void staticProxy() {
+
+    }
 }

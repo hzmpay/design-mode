@@ -1,7 +1,7 @@
 package com.hzm.设计模式.代理模式;
 
 /**
- * 父类实际实现代理类
+ * 父类具体实现代理类（实际代理）
  *
  * @author Hezeming
  * @version 1.0
