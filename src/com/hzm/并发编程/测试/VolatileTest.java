@@ -1,4 +1,4 @@
-package com.hzm.设计模式.测试;
+package com.hzm.并发编程.测试;
 
 /**
  * volatile测试
