@@ -1,5 +1,8 @@
 package com.hzm.leetcode.栈;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * https://leetcode-cn.com/problems/daily-temperatures/
  *
@@ -44,13 +47,25 @@ public class 每日温度 {
 
     public static int[] dailyTemperatures2(int[] T) {
         int length = T.length;
+
         int[] result = new int[length];
+        Deque<Integer> stack = new LinkedList<>();
+
+        int preIdx = 0;
+        for (int i = 0; i < T.length; i++) {
+            if (stack.isEmpty()) {
+                stack.push(T[i]);
+                preIdx = i;
+            } else {
+                if (T[i] > T[preIdx]) {
+
+                }
+            }
+
+        }
+
+
         return result;
     }
 
-    public static int[] dailyTemperatures3(int[] T) {
-        int length = T.length;
-        int[] result = new int[length];
-        return result;
-    }
 }
