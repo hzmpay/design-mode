@@ -46,7 +46,7 @@ public class 二叉树的中序遍历 {
         List<Integer> list = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();
 
-        while (root != null && !stack.isEmpty()) {
+        while (root != null || !stack.isEmpty()) {
             while (root != null) {
                 // 一直往左节点遍历，直到左节点为空退出
                 stack.push(root);
