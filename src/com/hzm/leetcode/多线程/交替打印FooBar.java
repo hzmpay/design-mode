@@ -1,6 +1,9 @@
 package com.hzm.leetcode.多线程;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * https://leetcode-cn.com/problems/print-foobar-alternately/
@@ -16,7 +19,67 @@ public class 交替打印FooBar {
     }
 
     /**
-     * wait,notify方式
+     * Condition方式
+     *
+     * @author Hezeming
+     * @version 1.0
+     * @data 2020年12月02日
+     */
+    static class FooBar3 {
+
+        private Lock lock = new ReentrantLock();
+
+        private Condition condition = lock.newCondition();
+
+        private boolean isFoo = true;
+
+        private int n;
+
+        public FooBar3(int n) {
+            this.n = n;
+        }
+
+        public void foo(Runnable printFoo) throws InterruptedException {
+
+            for (int i = 0; i < n; i++) {
+
+                // printFoo.run() outputs "foo". Do not change or remove this line.
+                lock.lock();
+                try {
+                    while (!isFoo) {
+                        condition.await();
+                    }
+                    printFoo.run();
+                    isFoo = false;
+                    condition.signalAll();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+
+        public void bar(Runnable printBar) throws InterruptedException {
+
+            for (int i = 0; i < n; i++) {
+
+                // printBar.run() outputs "bar". Do not change or remove this line.
+                lock.lock();
+                try {
+                    while (isFoo) {
+                        condition.await();
+                    }
+                    printBar.run();
+                    isFoo = true;
+                    condition.signalAll();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+
+    /**
+     * Semaphore方式
      *
      * @author Hezeming
      * @version 1.0
