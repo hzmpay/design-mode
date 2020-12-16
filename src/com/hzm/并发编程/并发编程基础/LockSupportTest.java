@@ -16,7 +16,7 @@ public class LockSupportTest {
         Object blocker = LockSupport.getBlocker(thread);
         new Thread(() -> {
             try {
-                Thread.sleep(30 * 1000);
+                Thread.sleep(3 * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -27,7 +27,7 @@ public class LockSupportTest {
         System.out.println("开始上锁 ============>");
         LockSupport.park(blocker);
 
-        TimeUnit.HOURS.sleep(1);
+//        TimeUnit.HOURS.sleep(1);
 
     }
 }
