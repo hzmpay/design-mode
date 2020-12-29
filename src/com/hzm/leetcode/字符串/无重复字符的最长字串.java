@@ -16,10 +16,10 @@ public class 无重复字符的最长字串 {
 //        System.out.println(lengthOfLongestSubstring("abcabcbb"));
 //        System.out.println(lengthOfLongestSubstring("bbbbb"));
 //        System.out.println(lengthOfLongestSubstring("pwwkew"));
-        System.out.println(lengthOfLongestSubstring(" "));
-        System.out.println(lengthOfLongestSubstring("arc"));
-        System.out.println(lengthOfLongestSubstring("abcabcbb"));
-        System.out.println(lengthOfLongestSubstring("bbb"));
+//        System.out.println(lengthOfLongestSubstring3(" "));
+        System.out.println(lengthOfLongestSubstring3("arc"));
+        System.out.println(lengthOfLongestSubstring3("abcabcbb"));
+        System.out.println(lengthOfLongestSubstring3("bbb"));
     }
 
     public static int lengthOfLongestSubstring(String s) {
@@ -107,5 +107,28 @@ public class 无重复字符的最长字串 {
 
         return maxLength;
 
+    }
+
+    public static int lengthOfLongestSubstring3(String s) {
+        if (s == null || "".equals(s)) {
+            return 0;
+        }
+        if (s.length() == 1) {
+            return 1;
+        }
+        int left = 0;
+        int len = 0;
+        char[] charArr = s.toCharArray();
+        for (int i = 1; i < charArr.length; i++) {
+            // 和前一个一样则换left
+            if (charArr[i] == charArr[i - 1]) {
+                len = Integer.max(len, i - left);
+                left = i;
+            } else if (i == charArr.length - 1) {
+                // 到最后一个都不相等直接得到len
+                len = Integer.max(len, i - left + 1);
+            }
+        }
+        return len;
     }
 }

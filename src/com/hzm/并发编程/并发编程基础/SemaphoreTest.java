@@ -1,4 +1,4 @@
-package com.hzm.leetcode;
+package com.hzm.并发编程.并发编程基础;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
