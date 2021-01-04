@@ -24,7 +24,6 @@ public class 二叉树展开为链表 {
         for (int i = 1; i < list.size(); i++) {
             pre.left = null;
             TreeNode cur = list.get(i);
-            pre.left = null;
             pre.right = cur;
             pre = cur;
         }

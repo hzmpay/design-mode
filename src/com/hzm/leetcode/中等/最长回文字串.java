@@ -13,7 +13,7 @@ public class 最长回文字串 {
         System.out.println(longestPalindrome2("nn"));
         System.out.println(longestPalindrome2("ac"));
         System.out.println(longestPalindrome2("babad"));
-        System.out.println(longestPalindrome2("cbbd"));
+        System.out.println(longestPalindrome2("cbbbcd"));
 //        System.out.println(isReverse("babad".toCharArray(), 0, 3));
     }
 
