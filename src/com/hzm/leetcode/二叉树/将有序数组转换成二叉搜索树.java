@@ -12,9 +12,29 @@ import sun.security.provider.MD2;
 public class 将有序数组转换成二叉搜索树 {
 
     public static void main(String[] args) {
-        TreeNode treeNode = sortedArrayToBST(new int[]{-10, -3, 0, 5, 9});
+        TreeNode treeNode = sortedArrayToBST2(new int[]{-10, -3, 0, 5, 9});
         System.out.println(treeNode);
     }
+
+    public static TreeNode sortedArrayToBST2(int[] nums) {
+        if (nums == null) {
+            return null;
+        }
+        return createNode2(nums, 0, nums.length - 1);
+    }
+
+    public static TreeNode createNode2(int[] nums, int left, int right) {
+        // 相遇
+        if (left > right) {
+            return null;
+        }
+        int middle = (left + right) / 2;
+        TreeNode treeNode = new TreeNode(nums[middle]);
+        treeNode.left = createNode2(nums, left, middle - 1);
+        treeNode.right = createNode2(nums, middle + 1, right);
+        return treeNode;
+    }
+
 
     public static TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null) {

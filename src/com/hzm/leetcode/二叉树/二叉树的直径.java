@@ -11,18 +11,22 @@ import sun.misc.LRUCache;
  */
 public class 二叉树的直径 {
 
-    static int maxValue = 0;
+    /**
+     * 从1开始，因为空数组返回是0（结果-1）
+     */
+    static int maxValue = 1;
 
     public static void main(String[] args) {
 
     }
 
-    public static int diameterOfBinaryTree(TreeNode root) {
+    public int diameterOfBinaryTree(TreeNode root) {
         getMaxValue(root);
+        // 最终长度 = 节点数 - 1
         return maxValue - 1;
     }
 
-    public static int getMaxValue(TreeNode root) {
+    public int getMaxValue(TreeNode root) {
         if (root == null) {
             // 空节点，返回0
             return 0;

@@ -35,7 +35,7 @@ public class 验证二叉搜索树 {
      */
     public static boolean help2(TreeNode root) {
         Deque<TreeNode> stack = new LinkedList<>();
-        int preVal = -1;
+        double preVal = -Double.MAX_VALUE;
         // 按出栈中序
         while (root != null || !stack.isEmpty()) {
             while (root != null) {
@@ -43,7 +43,7 @@ public class 验证二叉搜索树 {
                 root = root.left;
             }
             root = stack.pop();
-            if (root.val < preVal) {
+            if (root.val <= preVal) {
                 return false;
             }
             preVal = root.val;
