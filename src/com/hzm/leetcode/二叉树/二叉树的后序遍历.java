@@ -35,14 +35,11 @@ public class 二叉树的后序遍历 {
             while (root != null) {
                 stack.push(root);
                 root = root.left;
-                if (root != null) {
-                    list.add(root.val);
-                }
             }
             TreeNode treeNode = stack.pop();
             int centerVal = treeNode.val;
             root = treeNode.right;
-            list.add(treeNode.val);
+            list.add(root.val);
             list.add(centerVal);
         }
         return list;

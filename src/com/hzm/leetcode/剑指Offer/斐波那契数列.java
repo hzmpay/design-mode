@@ -1,4 +1,4 @@
-package com.hzm.leetcode.数列;
+package com.hzm.leetcode.剑指Offer;
 
 /**
  * https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/solution/di-gui-he-fei-di-gui-liang-chong-fang-shi-du-ji-ba/

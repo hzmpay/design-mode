@@ -1,4 +1,4 @@
-package com.hzm.leetcode.数列;
+package com.hzm.leetcode.剑指Offer;
 
 /**
  * https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/
