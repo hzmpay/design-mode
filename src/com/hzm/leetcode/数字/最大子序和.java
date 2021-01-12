@@ -20,6 +20,20 @@ public class 最大子序和 {
         System.out.println(maxSubArray(nums));
     }
 
+    public static int maxSubArray2(int[] nums) {
+        // f(i) = max[f(n - 1) + nums(i), nums(i)]
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int maxNum = nums[0];
+        int preNum = maxNum;
+        for (int i = 1; i < nums.length; i++) {
+            preNum = Math.max(preNum + nums[i], nums[i]);
+            maxNum = Math.max(preNum, maxNum);
+        }
+        return maxNum;
+    }
+
     public static int maxSubArray(int[] nums) {
         // TODO 思路有问题，应该先把所有的连续正数进行整合成一个新数组，再进行下面请求
         if (nums.length == 1) {
