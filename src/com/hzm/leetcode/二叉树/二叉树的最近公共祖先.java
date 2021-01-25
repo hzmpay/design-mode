@@ -13,6 +13,23 @@ public class 二叉树的最近公共祖先 {
 
     }
 
+    public static TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        // 都在右边
+        if (left == null) {
+            return right;
+        }
+        // 都在左边
+        if (right == null) {
+            return left;
+        }
+        return root;
+    }
+
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == p || root == q || root == null) {
             return root;

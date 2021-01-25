@@ -16,6 +16,19 @@ public class 二叉树展开为链表 {
 
     }
 
+    public static void flatten2(TreeNode root) {
+
+    }
+    public static TreeNode preOrderTraversal2(TreeNode root, TreeNode curNode) {
+        if (root != null) {
+            curNode.right = root;
+            curNode = curNode.right;
+            preOrderTraversal2(root.left, curNode);
+            preOrderTraversal2(root.right, curNode);
+        }
+        return curNode;
+    }
+
     public static void flatten(TreeNode root) {
         List<TreeNode> list = new ArrayList<>();
         preOrderTraversal(root, list);

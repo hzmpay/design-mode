@@ -46,6 +46,31 @@ public class 二叉树的前序遍历 {
      * @return java.util.List<java.lang.Integer>
      * @author Hezeming
      */
+    public static List<Integer> preOrderTraversal2Demo(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (!stack.isEmpty() || root != null) {
+            // 从中 -》 左
+            while (root != null) {
+                result.add(root.val);
+                stack.push(root);
+                root = root.left;
+                // 左节点为空退出
+            }
+            // 中间节点
+            root = stack.pop();
+            root = root.right;
+        }
+        return result;
+    }
+
+    /**
+     * 栈的形式
+     *
+     * @param root
+     * @return java.util.List<java.lang.Integer>
+     * @author Hezeming
+     */
     public static List<Integer> preOrderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root == null) {
