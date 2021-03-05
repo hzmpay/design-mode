@@ -17,12 +17,72 @@ public class 无重复字符的最长字串 {
 //        System.out.println(lengthOfLongestSubstring("bbbbb"));
 //        System.out.println(lengthOfLongestSubstring("pwwkew"));
 //        System.out.println(lengthOfLongestSubstring3(" "));
-        System.out.println(lengthOfLongestSubstring3("arc"));
-        System.out.println(lengthOfLongestSubstring3("abcabcbb"));
-        System.out.println(lengthOfLongestSubstring3("bbb"));
+//        System.out.println(lengthOfLongestSubstring4("arc"));
+//        System.out.println(lengthOfLongestSubstring4("abcabcbb"));
+//        System.out.println(lengthOfLongestSubstring4("bbb"));
+//        System.out.println(lengthOfLongestSubstring4("anviaj"));
+//        System.out.println(lengthOfLongestSubstring4("qrsvbspk"));
+        System.out.println(lengthOfLongestSubstring4("bpfbhmipx"));
     }
 
-    public static int lengthOfLongestSubstring(String s) {
+    public static int lengthOfLongestSubstring4(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        char[] charArr = s.toCharArray();
+        /*
+         * 1.定义双指针，遍历charArr
+         * 2.将指针区间的值和坐标放到map中
+         * 3.遍历到重复char，记录长度，将左指针定位到重复char的下一个坐标，将map中左指针之前的值都remove掉
+         * 4.直到遍历到结尾，如果没有重复则记录左右指针长度，比较最长子串长度
+         */
+        int maxLen = 1;
+        int l = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        map.put(charArr[l], l);
+        for (int r = 1; r < charArr.length; r++) {
+            Character rVal = charArr[r];
+            Integer idx = map.get(rVal);
+            // 重复char
+            if (idx != null) {
+                // 记录长度
+                maxLen = Math.max(maxLen, map.size());
+                // 重新初始化map
+                int newL = idx + 1;
+                for (int i = idx; i >= l; i--) {
+                    Integer oldVal = map.remove(charArr[i]);
+                    if (oldVal == null) {
+                        // 说明已经没有了
+                        break;
+                    }
+                }
+                // 将左指针定位到重复char的下一个坐标
+                l = newL;
+            }
+            map.put(charArr[r], r);
+            if (r == charArr.length - 1) {
+                // 直到遍历到结尾，如果没有重复则记录左右指针长度，比较最长子串长度
+                maxLen = Math.max(maxLen, map.size());
+            }
+        }
+        return maxLen;
+    }
+
+    /**
+     * 初始化map
+     *
+     * @param oldL
+     * @param newL
+     * @return java.util.Map<java.lang.Character, java.lang.Integer>
+     * @author Hezeming
+     */
+    public static Map<Character, Integer> initMap(char[] charArr, int oldL, int newL) {
+        Map<Character, Integer> map = new HashMap<>();
+        map.put(charArr[newL], newL);
+        return map;
+    }
+
+    public static int lengthOfLongestSubstring3(String s) {
         // 记录最长字串长度
         int maxLength = 0;
         char[] charArr = s.toCharArray();
@@ -109,7 +169,7 @@ public class 无重复字符的最长字串 {
 
     }
 
-    public static int lengthOfLongestSubstring3(String s) {
+    public static int lengthOfLongestSubstring1(String s) {
         if (s == null || "".equals(s)) {
             return 0;
         }
