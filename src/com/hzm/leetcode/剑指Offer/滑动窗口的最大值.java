@@ -1,5 +1,6 @@
 package com.hzm.leetcode.剑指Offer;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -13,8 +14,40 @@ import java.util.LinkedList;
 public class 滑动窗口的最大值 {
 
     public static void main(String[] args) {
-        int[] nums = {1,3,-1,-3,5,3,6,7};
-        maxSlidingWindow(nums, 3);
+        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
+        System.out.println(Arrays.toString(maxSlidingWindow2(nums, 3)));
+    }
+
+    public static int[] maxSlidingWindow2(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        if (nums.length == 1) {
+            return nums;
+        }
+        // 定义窗口最大值（因为每次滑动都是 减去nums[left] ，加nums[right]，所以这里可以用这两的差值作最大值比较）
+        int maxDiff = 0;
+        int maxLeft = 0;
+        // 滑动次数
+        int count = nums.length - k;
+        // 定义左右指针
+        int left = 1;
+        int right = k;
+        for (int i = 0; i < count; i++) {
+            int diff = nums[right] - nums[left - 1];
+            if (diff > maxDiff) {
+                // 大于说明窗口最大值变了
+                maxDiff = diff;
+                maxLeft = left;
+            }
+            left++;
+            right++;
+        }
+        int[] result = new int[k];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = nums[maxLeft++];
+        }
+        return result;
     }
 
     public static int[] maxSlidingWindow(int[] nums, int k) {

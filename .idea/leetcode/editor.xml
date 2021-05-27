@@ -283,6 +283,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[209]长度最小的子数组.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[209]长度最小的子数组.java" />
+              <option name="questionId" value="209" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[20]有效的括号.java">
           <value>
             <LeetcodeEditor>
@@ -520,6 +528,14 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[543]二叉树的直径.java" />
               <option name="questionId" value="543" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[567]字符串的排列.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[567]字符串的排列.java" />
+              <option name="questionId" value="567" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -787,6 +803,14 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[剑指 Offer 30]包含min函数的栈.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[剑指 Offer 30]包含min函数的栈.java" />
+              <option name="questionId" value="100302" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[剑指 Offer 38]字符串的排列.java">
           <value>
             <LeetcodeEditor>
@@ -880,62 +904,6 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[面试题 16.11]跳水板.java" />
               <option name="questionId" value="100352" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[108]将有序数组转换为二叉搜索树.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[108]将有序数组转换为二叉搜索树.java" />
-              <option name="questionId" value="108" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[1]两数之和.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[1]两数之和.java" />
-              <option name="questionId" value="1" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[21]合并两个有序链表.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[21]合并两个有序链表.java" />
-              <option name="questionId" value="21" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[23]合并K个升序链表.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[23]合并K个升序链表.java" />
-              <option name="questionId" value="23" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[2]两数相加.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[2]两数相加.java" />
-              <option name="questionId" value="2" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[7]整数反转.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[7]整数反转.java" />
-              <option name="questionId" value="7" />
-            </LeetcodeEditor>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[83]删除排序链表中的重复元素.java">
-          <value>
-            <LeetcodeEditor>
-              <option name="path" value="$PROJECT_DIR$/leetcode_plugin/leetcode/editor/cn/[83]删除排序链表中的重复元素.java" />
-              <option name="questionId" value="83" />
             </LeetcodeEditor>
           </value>
         </entry>

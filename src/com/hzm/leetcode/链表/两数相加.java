@@ -13,8 +13,58 @@ public class 两数相加 {
     public static void main(String[] args) {
         ListNode l1 = ListNode.toNode("[9,9,9,9,9,9,9]");
         ListNode l2 = ListNode.toNode("[9,9,9,9]");
-        ListNode listNode = addTwoNumbers(l1, l2);
+        ListNode listNode = addTwoNumbers2(l2, l1);
         System.out.println(listNode.toString());
+    }
+
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null) {
+            return null;
+        } else if (l1 == null) {
+            return l2;
+        } else if (l2 == null) {
+            return l1;
+        } else { // 两个都不为空开始计算
+            // 设置l1为头结点
+            ListNode head = l1;
+            // 是否进位
+            boolean isAdd = false;
+            // 记录上一个节点
+            ListNode pre = null;
+            // 两个都不为空时才进行计算
+            while (l1 != null && l2 != null) {
+                int val = l1.val + l2.val;
+                if (isAdd) {
+                    val++;
+                }
+                // 判断下次是否进位
+                isAdd = val >= 10;
+                if (isAdd) {
+                    val = val - 10;
+                }
+                l1.val = val;
+                pre = l1;
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            // 判断下一个是l1还是l2
+            ListNode cur = l1 == null ? l2 : l1;
+            pre.next = cur;
+            while (cur != null && isAdd) {
+                cur.val++;
+                isAdd = cur.val >= 10;
+                if (isAdd) {
+                    cur.val = cur.val - 10;
+                }
+                pre = cur;
+                cur = cur.next;
+            }
+            if (isAdd) {
+                // 补充进位
+                pre.next = new ListNode(1);
+            }
+            return head;
+        }
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {

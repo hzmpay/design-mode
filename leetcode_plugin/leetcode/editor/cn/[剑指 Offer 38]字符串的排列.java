@@ -23,14 +23,40 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public String[] permutation(String s) {
-        // 1 2 6
-        // f(n) = f(n - 1) * n
 
+    private static final List<String> list = new ArrayList<>();
+
+    private char[] chars;
+
+    public String[] permutation(String s) {
+        chars = s.toCharArray();
+        dfs(0);
+        return list.toArray(new String[list.size()]);
     }
 
-    public String[] de() {
+    public void dfs(int x) {
+        if (x == chars.length - 1) {
+            list.add(new String(chars));
+            return;
+        }
+        // 定义set防止同一层重复元素计算
+        HashSet<Character> set = new HashSet<>();
+        for (int i = x; i < chars.length; i++) {
+            char aChar = chars[i];
+            if (set.contains(aChar)) {
+                continue;
+            }
+            set.add(aChar);
+            swap(x, i);
+            dfs(x + 1);
+            swap(x, i);
+        }
+    }
 
+    private void swap(int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
