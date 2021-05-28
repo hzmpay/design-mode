@@ -30,7 +30,7 @@ public class 字符串的排列 {
 
     public void dfs(int x) {
         if (x == chars.length - 1) {
-            list.add(new String(chars));
+            list.add(String.valueOf(chars));
             return;
         }
         // 定义set防止同一层重复元素计算

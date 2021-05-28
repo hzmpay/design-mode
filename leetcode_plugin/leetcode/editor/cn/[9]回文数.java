@@ -32,19 +32,21 @@ import java.util.stream.IntStream;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean isPalindrome(int x) {
-        // 小于0 和 个位数是0的直接返回false（因为最高位不可能为0）
+        // x小于零和个位数是0的直接是不对（数字开头不会是0）
         if (x < 0 || (x != 0 && x % 10 == 0)) {
-            // 负数直接返回false
             return false;
         }
-
+        // x    reverseNum
+        // 1234321  0      123321  0
+        // 123432   1      12332   1
+        // 12343    12     1233    12
+        // 1234     123    123     123
+        // 123      1234
         int reverseNum = 0;
-        // 直到原数字 小于（奇数位）或等于（偶数位）翻转的数时退出
-        while (x > reverseNum) {
+        while (reverseNum < x) {
             reverseNum = reverseNum * 10 + x % 10;
             x = x / 10;
         }
-
         return x == reverseNum || x == reverseNum / 10;
     }
 }

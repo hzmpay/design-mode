@@ -10,11 +10,69 @@ package com.hzm.leetcode.中等;
 public class 最长回文子串 {
 
     public static void main(String[] args) {
-        System.out.println(longestPalindrome2("nn"));
-        System.out.println(longestPalindrome2("ac"));
-        System.out.println(longestPalindrome2("babad"));
-        System.out.println(longestPalindrome2("cbbbcd"));
+        System.out.println(longestPalindrome4("nn"));
+        System.out.println(longestPalindrome4("ac"));
+        System.out.println(longestPalindrome4("babad"));
+        System.out.println(longestPalindrome4("cbbbcd"));
 //        System.out.println(isReverse("babad".toCharArray(), 0, 3));
+    }
+
+    /**
+     * 动态规划
+     *
+     * @param s
+     * @return int
+     * @author Hezeming
+     */
+    public static String longestPalindrome5(String s) {
+        // f(i,j) = f(i + 1, j + 1) && (Pi == Pj)
+        return null;
+    }
+
+
+    /**
+     * 暴力破解法：优化
+     *
+     * @param s
+     * @return int
+     * @author Hezeming
+     */
+    public static String longestPalindrome4(String s) {
+        // 暴力破解法
+        if (s == null || s.length() < 2) {
+            return s;
+        }
+        int maxStart = 0;
+        int maxLen = 1;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = i + 1; j < chars.length; j++) {
+                // 可能是回文子串，进行判断
+                int newMaxLen;
+                if (chars[i] == chars[j] && isReverse2(chars, i, j) && (newMaxLen = j - i + 1) > maxLen) {
+                    maxLen = newMaxLen;
+                    maxStart = i;
+                }
+            }
+        }
+        return new String(chars, maxStart, maxLen);
+    }
+
+    /**
+     * 是否是回文数
+     *
+     * @param charArr
+     * @param i
+     * @param j
+     * @return boolean
+     * @author Hezeming
+     */
+    public static boolean isReverse2(char[] charArr, int i, int j) {
+        boolean isReverse = false;
+        while (i < j && (isReverse = charArr[i++] == charArr[j--])) {
+
+        }
+        return isReverse;
     }
 
     /**

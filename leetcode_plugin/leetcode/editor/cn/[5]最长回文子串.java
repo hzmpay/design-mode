@@ -19,30 +19,27 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 
-    public String longestPalindrome2(String s) {
-        P(i, j) =
-    }
-
     public String longestPalindrome(String s) {
         // 暴力破解法
         if (s == null || s.length() < 2) {
             return s;
         }
-        char[] charArr = s.toCharArray();
-        // 定义最长子串的起始坐标和长度
-        int start = 0;
+        int maxStart = 0;
         int maxLen = 1;
-        for (int i = 0; i < charArr.length - 1; i++) {
-            for (int j = i + 1; j < charArr.length; j++) {
-                // 判断是否是回文子串 而且 长度大于原来长度，是的话记录，进行下一次循环，不是的话跳出循环
-                int curLen = j - i + 1;
-                if (isReverse(charArr, i, j) && curLen > maxLen) {
-                    start = i;
-                    maxLen = curLen;
+        char[] chars = s.toCharArray();
+        // 剩余长度如果小于最大长度那就没必要判断剩下的
+        for (int i = 0; i < chars.length && (chars.length - i + 1) > maxLen; i++) {
+            for (int j = i + 1; j < chars.length; j++) {
+                // 可能是回文子串，进行判断
+                int newMaxLen;
+                // 当f(i) = f(j)时 而且 i和j的长度大于最大长度时 才判断是否是回文子串
+                if (chars[i] == chars[j] && (newMaxLen = j - i + 1) > maxLen && isReverse(chars, i, j)) {
+                    maxLen = newMaxLen;
+                    maxStart = i;
                 }
             }
         }
-        return new String(charArr, start, maxLen);
+        return new String(chars, maxStart, maxLen);
     }
 
     /**

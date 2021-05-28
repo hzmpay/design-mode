@@ -10,8 +10,24 @@ package com.hzm.leetcode.中等;
 public class 盛最多水的容器 {
 
     public static void main(String[] args) {
-        int[] height = {1,8,6,2,5,4,8,3,7};
+        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
         System.out.println(maxArea(height));
+        System.out.println(maxArea2(height));
+    }
+
+    public static int maxArea2(int[] height) {
+        if (height == null || height.length == 1) {
+            return 0;
+        }
+        int maxArea = 0;
+        for (int i = 0; i < height.length; i++) {
+            for (int j = i + 1; j < height.length; j++) {
+                // 面积 = 高 * 宽
+                int curArea = Math.min(height[i], height[j]) * (j - i);
+                maxArea = Math.max(curArea, maxArea);
+            }
+        }
+        return maxArea;
     }
 
     public static int maxArea(int[] height) {
