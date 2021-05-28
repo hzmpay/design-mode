@@ -13,8 +13,42 @@ public class 盛最多水的容器 {
         int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
         System.out.println(maxArea(height));
         System.out.println(maxArea2(height));
+        System.out.println(maxArea3(height));
     }
 
+    /**
+     * 双指针
+     *
+     * @param height
+     * @return int
+     * @author Hezeming
+     */
+    public static int maxArea3(int[] height) {
+        if (height == null || height.length == 1) {
+            return 0;
+        }
+        int maxArea = 0;
+        int l = 0;
+        int r = height.length - 1;
+        while (l < r) {
+            if (height[l] > height[r]) {
+                maxArea = Math.max(maxArea, (r - l) * height[r]);
+                r--;
+            } else {
+                maxArea = Math.max(maxArea, (r - l) * height[l]);
+                l++;
+            }
+        }
+        return maxArea;
+    }
+
+    /**
+     * 双for暴力解法
+     *
+     * @param height
+     * @return int
+     * @author Hezeming
+     */
     public static int maxArea2(int[] height) {
         if (height == null || height.length == 1) {
             return 0;
@@ -30,6 +64,13 @@ public class 盛最多水的容器 {
         return maxArea;
     }
 
+    /**
+     * 双指针
+     *
+     * @param height
+     * @return int
+     * @author Hezeming
+     */
     public static int maxArea(int[] height) {
         // 数组长度
         int length = height.length;

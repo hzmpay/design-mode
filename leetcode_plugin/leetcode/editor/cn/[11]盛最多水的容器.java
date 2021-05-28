@@ -51,7 +51,22 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxArea(int[] height) {
-
+        if (height == null || height.length == 1) {
+            return 0;
+        }
+        int maxArea = 0;
+        int l = 0;
+        int r = height.length - 1;
+        while (l < r) {
+            if (height[l] > height[r]) {
+                maxArea = Math.max(maxArea, (r - l) * height[r]);
+                r--;
+            } else {
+                maxArea = Math.max(maxArea, (r - l) * height[l]);
+                l++;
+            }
+        }
+        return maxArea;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
