@@ -1,6 +1,8 @@
 package com.hzm.leetcode.设计;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * https://leetcode-cn.com/problems/lru-cache/
@@ -14,17 +16,23 @@ public class LRU缓存机制 {
     public static void main(String[] args) {
 
         LRUCache lRUCache = new LRUCache(2);
-        lRUCache.put(1, 1);
-        lRUCache.put(2, 2);
-        lRUCache.get(1);
-        lRUCache.put(3, 3);
-        lRUCache.get(2);
-        lRUCache.put(4, 4);
-        lRUCache.get(1);
-        lRUCache.get(3);
-        lRUCache.get(4);
-        // TODO 有问题
+//        lRUCache.put(1, 1);
+//        lRUCache.put(2, 2);
+//        int i = lRUCache.get(1);
+//        lRUCache.put(3, 3);
+//        int i1 = lRUCache.get(2);
+//        lRUCache.put(4, 4);
+//        int i2 = lRUCache.get(1);
+//        int i3 = lRUCache.get(3);
+//        int i4 = lRUCache.get(4);
 
+        int i = lRUCache.get(2);
+        lRUCache.put(2, 6);
+        int i2 = lRUCache.get(1);
+        lRUCache.put(1, 5);
+        lRUCache.put(1, 2);
+        int i3 = lRUCache.get(1);
+        int i4 = lRUCache.get(2);
     }
 
 
@@ -33,7 +41,9 @@ public class LRU缓存机制 {
         class Node {
             int key;
             int value;
+            /** 前驱节点 */
             Node prev;
+            /** 后驱节点 */
             Node next;
 
             public Node() {
@@ -45,120 +55,112 @@ public class LRU缓存机制 {
             }
         }
 
-        /**
-         * 总容量
-         */
-        private int capacity;
-        /**
-         * 当前容量
-         */
-        private int size;
-        /**
-         * <值，Node>
-         */
+        /** <key, Node> */
         private Map<Integer, Node> map;
-        /**
-         * 头节点
-         */
-        private Node firstNode;
-        /**
-         * 尾节点
-         */
-        private Node lastNode;
+        /** 容量 */
+        private int capacity;
+        /** 已使用容量 */
+        private int size;
+        /** 虚拟头部节点 */
+        Node head;
+        /** 虚拟尾部节点 */
+        Node tail;
 
         public LRUCache(int capacity) {
+            map = new HashMap<>(capacity * 4 / 3 + 1);
             this.capacity = capacity;
-            map = new HashMap<>(capacity * 4 / 3);
+            this.size = 0;
+            // 采用虚拟头尾节点，避免前后节点的空判断
+            head = new Node();
+            tail = new Node();
+            head.next = tail;
+            tail.prev = head;
         }
 
+        /**
+         * get操作依赖用HashMap保持O(1)复杂度
+         *
+         * @param key
+         * @return int
+         * @author Hezeming
+         */
         public int get(int key) {
+            // 1.从map获取
+            // 2.将该key对应的Node移到队列头部
             Node node = map.get(key);
-            if (node != null) {
-                // 升级这个节点为尾结点
-                moveEnd(node);
-                return node.value;
+            if (node == null) {
+                // 不存在返回-1
+                return -1;
             }
-            return -1;
+            moveHead(node);
+            return node.value;
         }
 
         public void put(int key, int value) {
-            if (capacity == 0) {
-                return;
-            }
-            Node oldNode = map.get(key);
-            // 存在直接替换原本节点的值，并把该节点移到末尾节点
-            if (oldNode != null) {
-                oldNode.value = value;
-                if (oldNode != lastNode) {
-                    // 刚好是尾节点则不用移动
-                    moveEnd(oldNode);
+            // 1.判断是否存在
+            Node node = map.get(key);
+            // 不存在
+            if (node == null) {
+                // 2.判断容量是否足够
+                //  1.足够：放到队列头部，存入map
+                //  2.不够：移除队列尾部元素，size++，放到队列头部，存入map
+                node = new Node(key, value);
+                if (size >= capacity) {
+                    // 删除尾部元素
+                    removeNode(tail.prev);
+                } else {
+                    size++;
                 }
-                return;
-            }
-            Node newNode = new Node(key, value);
-            if (size == 0) {
-                // 说明之前没有节点或者头节点和尾节点相同
-                firstNode = newNode;
-                lastNode = newNode;
-            } else if (size == 1) {
-                firstNode.next = newNode;
-                newNode.prev = firstNode;
-                lastNode = newNode;
+                addHead(node);
             } else {
-                // 新的节点添加到尾节点
-                addEnd(newNode);
-                // 将原本头节点的下一个节点升级为头节点
-                firstNode.next.prev = null;
-                firstNode = firstNode.next;
-            }
-            // 不存在则需要判断长度是否先删除再插入
-            if (size == capacity) {
-                // 已到达阀值则需要先删除头结点再插入
-                map.remove(firstNode.key);
-            } else {
-                // 未到达阀值则长度+1
-                size++;
-            }
-            // map添加节点
-            map.put(key, newNode);
-
-        }
-
-        public void moveEnd(Node node) {
-            // 只有1个值则不用移动
-            if (size > 1 && node != lastNode) {
-                // 先处理尾节点
-                lastNode.next = node;
-
-                // 当前节点是否是头节点
-                boolean isFirst = node == firstNode;
-
-                // 处理node的前后节点
-                if (!isFirst) {
-                    // 头节点不需要处理前置节点
-                    node.prev.next = node.next;
-                }
-                node.next.prev = node.prev;
-
-                if (isFirst) {
-                    // 头节点该需要改变头结点定义
-                    firstNode = node.next;
-                }
-
-                // 处理node本身
-                node.next = null;
-                node.prev = lastNode;
-                lastNode = node;
+                // 存在则替换value，移到头部
+                node.value = value;
+                moveHead(node);
             }
         }
 
-        public void addEnd(Node node) {
-            if (lastNode != node) {
-                lastNode.next = node;
-                node.prev = lastNode;
-            }
+        /**
+         * 添加新节点到head
+         *
+         * @param node
+         * @return void
+         * @author Hezeming
+         */
+        private void addHead(Node node) {
+            // 处理node
+            node.next = head.next;
+            node.prev = head;
+            // node插到head后面
+            head.next.prev = node;
+            head.next = node;
+            map.put(node.key, node);
         }
 
+        /**
+         * 将已存在的节点移到头结点
+         *
+         * @param node
+         * @return void
+         * @author Hezeming
+         */
+        private void moveHead(Node node) {
+            // 删除这个node，处理node前后节点
+            removeNode(node);
+            addHead(node);
+        }
+
+        /**
+         * 删除元素
+         *
+         * @param node
+         * @return void
+         * @author Hezeming
+         */
+        private void removeNode(Node node) {
+            node.prev.next = node.next;
+            node.next.prev = node.prev;
+            map.remove(node.key);
+        }
     }
 
     static class LRUCache1 extends LinkedHashMap<Integer, Integer> {
