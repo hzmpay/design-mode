@@ -1,4 +1,4 @@
-//给你二叉树的根节点 root ，返回它节点值的 前序 遍历。 
+//给定一个二叉树的根节点 root ，返回它的 中序 遍历。 
 //
 // 
 //
@@ -6,7 +6,7 @@
 //
 // 
 //输入：root = [1,null,2,3]
-//输出：[1,2,3]
+//输出：[1,3,2]
 // 
 //
 // 示例 2： 
@@ -27,7 +27,7 @@
 //
 // 
 //输入：root = [1,2]
-//输出：[1,2]
+//输出：[2,1]
 // 
 //
 // 示例 5： 
@@ -48,18 +48,12 @@
 //
 // 
 //
-// 进阶：递归算法很简单，你可以通过迭代算法完成吗？ 
-// Related Topics 栈 树 
-// 👍 525 👎 0
+// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？ 
+// Related Topics 栈 树 哈希表 
+// 👍 977 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -76,23 +70,22 @@ import java.util.List;
  * }
  */
 class Solution {
-
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
         Deque<TreeNode> stack = new LinkedList<>();
         while (root != null || !stack.isEmpty()) {
-            // 一直往左节点迭代，直到左节点不存在
             while (root != null) {
-                list.add(root.val);
                 stack.push(root);
                 root = root.left;
             }
-            // 拿到的是上一个左节点
             root = stack.pop();
+            result.add(root.val);
             root = root.right;
         }
-        return list;
+        return result;
     }
-
 }
 //leetcode submit region end(Prohibit modification and deletion)

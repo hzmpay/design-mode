@@ -13,6 +13,26 @@ public class 二叉树的最近公共祖先 {
 
     }
 
+    public static TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+        // 阻断条件，p和q同时在root下面找，找到一个就返回
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        //
+        TreeNode left = lowestCommonAncestor3(root.left, p, q);
+        TreeNode right = lowestCommonAncestor3(root.right, p, q);
+        // 左边一个都没找到，说明p，q都在右边
+        if (left == null) {
+            return right;
+        }
+        // 右边一个都没找到，说明p，q都在左边
+        if (right == null) {
+            return left;
+        }
+        // 两边各有一个，说明root是根节点
+        return root;
+    }
+
     public static TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {
             return root;

@@ -19,6 +19,52 @@ public class 二叉树的后序遍历 {
     }
 
     /**
+     * 迭代的方式
+     *
+     * @param root
+     * @return java.util.List<java.lang.Integer>
+     * @author Hezeming
+     */
+    public static List<Integer> postorderTraversal4(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (root != null || stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            root = root.right;
+        }
+        return list;
+    }
+
+    /**
+     * 递归
+     *
+     * @param root
+     * @return java.util.List<java.lang.Integer>
+     * @author Hezeming
+     */
+    public static List<Integer> postorderTraversal3(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        postorderTraversal3(root, list);
+        return list;
+    }
+
+    public static void postorderTraversal3(TreeNode root, List<Integer> list) {
+        if (root != null) {
+            postorderTraversal3(root.left, list);
+            postorderTraversal3(root.right, list);
+            list.add(root.val);
+        }
+    }
+
+
+    /**
      * 栈的方式
      *
      * @param root

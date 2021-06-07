@@ -34,24 +34,26 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
+        // 层次遍历
         List<Integer> result = new ArrayList<>();
         if (root == null) {
             return result;
         }
-        List<TreeNode> list = new ArrayList<>();
-        list.add(root);
+        // 存储上一级的TreeNode
+        List<TreeNode> list = Arrays.asList(root);
         while (!list.isEmpty()) {
-            List<TreeNode> newList = new ArrayList<>();
+            // 存储当前级的TreeNode
+            List<TreeNode> curList = new ArrayList<>();
             for (TreeNode treeNode : list) {
                 if (treeNode.left != null) {
-                    newList.add(treeNode.left);
+                    curList.add(treeNode.left);
                 }
                 if (treeNode.right != null) {
-                    newList.add(treeNode.right);
+                    curList.add(treeNode.right);
                 }
             }
             result.add(list.get(list.size() - 1).val);
-            list = newList;
+            list = curList;
         }
         return result;
     }

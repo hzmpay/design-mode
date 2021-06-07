@@ -13,6 +13,13 @@ public class 二叉树的最大深度 {
 
     }
 
+    public static int maxDepth1(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth1(root.left), maxDepth1(root.right));
+    }
+
     public static int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;

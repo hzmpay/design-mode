@@ -1,6 +1,4 @@
-package com.hzm.leetcode.栈;
-
-import com.hzm.leetcode.二叉树.TreeNode;
+package com.hzm.leetcode.二叉树;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -20,6 +18,31 @@ public class 二叉树的中序遍历 {
 
     }
 
+    /**
+     * 栈的方式迭代
+     *
+     * @param root
+     * @return java.util.List<java.lang.Integer>
+     * @author Hezeming
+     */
+    public static List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            result.add(root.val);
+            root = root.right;
+        }
+        return result;
+    }
+
     public static List<Integer> inorderTraversal(TreeNode root) {
         return calc(root, new ArrayList<>());
     }
@@ -33,7 +56,7 @@ public class 二叉树的中序遍历 {
      * @author Hezeming
      */
     public static List<Integer> calc(TreeNode root, List<Integer> list) {
-        if (root == null) {
+        if (root != null) {
             return list;
         }
         calc(root.left, list);

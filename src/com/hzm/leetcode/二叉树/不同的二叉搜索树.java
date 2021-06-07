@@ -13,4 +13,8 @@ public class 不同的二叉搜索树 {
 
     }
 
+    public static int numTrees(int n) {
+        return 0;
+    }
+
 }

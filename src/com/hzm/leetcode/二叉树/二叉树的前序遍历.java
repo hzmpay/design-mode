@@ -15,7 +15,54 @@ import java.util.List;
 public class 二叉树的前序遍历 {
 
     public static void main(String[] args) {
+        List<Integer> list = preorderTraversal4(TreeNode.createTree(new Integer[]{1, null, 2, 3}));
+        System.out.println(list);
+    }
 
+    /**
+     * 迭代
+     *
+     * @param root
+     * @return java.util.List<java.lang.Integer>
+     * @author Hezeming
+     */
+    public static List<Integer> preorderTraversal4(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (root != null || !stack.isEmpty()) {
+            // 一直往左节点迭代，直到左节点不存在
+            while (root != null) {
+                list.add(root.val);
+                stack.push(root);
+                root = root.left;
+            }
+            // 拿到的是上一个左节点
+            root = stack.pop();
+            root = root.right;
+        }
+        return list;
+    }
+
+
+    /**
+     * 递归
+     *
+     * @param root
+     * @return java.util.List<java.lang.Integer>
+     * @author Hezeming
+     */
+    public static List<Integer> preorderTraversal3(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        preorderTraversal3(root, list);
+        return list;
+    }
+
+    public static void preorderTraversal3(TreeNode root, List<Integer> list) {
+        if (root != null) {
+            list.add(root.val);
+            preorderTraversal3(root.left, list);
+            preorderTraversal3(root.right, list);
+        }
     }
 
     /**

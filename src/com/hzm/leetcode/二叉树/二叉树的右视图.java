@@ -1,6 +1,7 @@
 package com.hzm.leetcode.二叉树;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,6 +12,31 @@ import java.util.List;
  * @date 2021年01月25日
  */
 public class 二叉树的右视图 {
+
+    public List<Integer> rightSideView2(TreeNode root) {
+        // 层次遍历
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        // 存储上一级的TreeNode
+        List<TreeNode> list = Arrays.asList(root);
+        while (!list.isEmpty()) {
+            // 存储当前级的TreeNode
+            List<TreeNode> curList = new ArrayList<>();
+            for (TreeNode treeNode : list) {
+                if (treeNode.left != null) {
+                    curList.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    curList.add(treeNode.right);
+                }
+            }
+            result.add(list.get(list.size() - 1).val);
+            list = curList;
+        }
+        return result;
+    }
 
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();

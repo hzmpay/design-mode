@@ -17,7 +17,24 @@ public class 二叉树的直径 {
     static int maxValue = 1;
 
     public static void main(String[] args) {
+        TreeNode.createTree(new Integer[]{4, -7, -3, null, null, -9, -3, 9, -7, -4, null, 6, null, -6, -6, null, null, 0, 6, 5, null, 9, null, null, -1, -4, null, null, null, -2}).out();
+    }
 
+    public static int diameterOfBinaryTree2(TreeNode root) {
+        help(root);
+        return maxValue - 1;
+    }
+
+    public static int help(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = help(root.left);
+        int r = help(root.right);
+        // 最大长度 = 左节点的最大树高 + 右节点的最大树高 + 1
+        // 每轮计算当前节点的最长路线
+        maxValue = Math.max(l + r + 1, maxValue);
+        return 1 + Math.max(l, r);
     }
 
     public int diameterOfBinaryTree(TreeNode root) {
