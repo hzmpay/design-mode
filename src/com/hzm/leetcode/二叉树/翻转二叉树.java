@@ -13,6 +13,23 @@ public class 翻转二叉树 {
 
     }
 
+
+
+    public static TreeNode invertTree2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode right = invertTree2(root.left);
+        TreeNode left = invertTree2(root.right);
+        root.left = left;
+        root.right = right;
+        return root;
+    }
+
+
+
+
+
     public static TreeNode invertTree(TreeNode root) {
         if (root != null) {
             TreeNode left = invertTree(root.left);

@@ -1,7 +1,5 @@
 package com.hzm.leetcode.二进制;
 
-import java.util.Arrays;
-
 /**
  * https://leetcode-cn.com/problems/single-number/solution/
  *

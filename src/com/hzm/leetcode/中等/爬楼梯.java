@@ -15,7 +15,22 @@ public class 爬楼梯 {
     public static void main(String[] args) {
 //        System.out.println(climbStairs(44));
         System.out.println(climbStairs2(44));
+        System.out.println(climbStairs3(44));
     }
+
+    public static int climbStairs3(int n) {
+        // 1 2 3 5
+        int p = 0, q = 1, r = 1;
+        for (int i = 0; i < n; i++) {
+            r = p + q;
+            p = q;
+            q = r;
+        }
+        return r;
+    }
+
+
+
 
     public static int climbStairs2(int n) {
         int p = 0, q = 0, r = 1;

@@ -27,26 +27,30 @@ import java.util.TreeMap;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    /**
+     * 采用数组存储每个字符串的次数,去除多出来的奇数位 + 1就是长度
+     * 比如：aabbcccddddd
+     * 最长是：aabbccddddd，去除了c和d然后+1
+     *
+     * @param s
+     * @return int
+     * @author Hezeming
+     */
     public int longestPalindrome(String s) {
-        Map<Character, Integer> map = new HashMap<>();
-        char[] charArr = s.toCharArray();
-        for (char c : charArr) {
-            Integer num = map.get(c);
-            map.put(c, num == null ? 1 : num + 1);
+        if (s == null || s.length() == 0) {
+            return 0;
         }
-        int doubleNum = 0;
-        int maxSingleNum = 0;
-        for (Integer value : map.values()) {
-            int calcNum = value % 2;
-            if (calcNum == 0) {
-                // 偶数位
-                doubleNum += value;
-            } else {
-                // 奇数位
-                maxSingleNum = Integer.max(maxSingleNum, value);
-            }
+        int[] arr = new int[128];
+        char[] chars = s.toCharArray();
+        for (char c : chars) {
+            arr[c]++;
         }
-        return doubleNum + maxSingleNum;
+        int oddCount = 0;
+        for (int i : arr) {
+            oddCount += i % 2;
+        }
+        // 没有奇数位则整个字符串都是回文数
+        return oddCount == 0 ? s.length() : s.length() - oddCount + 1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
