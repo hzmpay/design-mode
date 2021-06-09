@@ -12,6 +12,9 @@ public class ListNode {
     public int val;
     public ListNode next;
 
+    public ListNode() {
+    }
+
     public ListNode(int val) {
         this.val = val;
     }
@@ -29,6 +32,10 @@ public class ListNode {
             builder.append(next.toString());
         }
         return builder.toString();
+    }
+
+    public void out() {
+        System.out.println(toString());
     }
 
     /**

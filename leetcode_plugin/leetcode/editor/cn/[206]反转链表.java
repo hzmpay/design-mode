@@ -22,7 +22,19 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-
+        // 1 2 3 4 5
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            // 取出当前节点的下一个节点
+            ListNode next = cur.next;
+            // 将当前节点的下一个节点指向pre
+            cur.next = pre;
+            // 重置cur，pre
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

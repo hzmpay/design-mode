@@ -11,8 +11,35 @@ public class 两两交换链表中的节点 {
 
     public static void main(String[] args) {
         ListNode listNode = ListNode.toNode("[1,2,3,4]");
-        System.out.println(swapPairs2(listNode));
+        System.out.println(swapPairs4(listNode));
     }
+
+    public static ListNode swapPairs4(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = head.next;
+        head.next = swapPairs4(newHead.next);
+        newHead.next = head;
+        return newHead;
+    }
+
+    public static ListNode swapPairs3(ListNode head) {
+        ListNode vHead = new ListNode(-1, head);
+        ListNode temp = vHead;
+        while (temp.next != null && temp.next.next != null) {
+            ListNode node1 = temp.next;
+            ListNode node2 = temp.next.next;
+            temp.next = node2;
+            node1.next = node2.next;
+            node2.next = node1;
+            temp = node1;
+        }
+        return vHead.next;
+    }
+
+
+
 
     public static ListNode swapPairs2(ListNode head) {
         // 1 2 3 4 5 6

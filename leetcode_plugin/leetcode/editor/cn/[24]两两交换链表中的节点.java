@@ -50,20 +50,18 @@
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        // 1 2 3 4 5 6
-        /*
-         * 1.1-2交换，此时head由1变成了2，所以返回之前2的地址
-         * 1-2-3-4-5-6 -> 2-1-3-4-5-6
-         * 2.递归传入1的下一个节点，也就是3
-         */
-        if (head == null || head.next == null) {
-            return null;
+        ListNode vHead = new ListNode(-1, head);
+        ListNode temp = vHead;
+        while (temp.next != null && temp.next.next != null) {
+            ListNode node1 = temp.next;
+            ListNode node2 = temp.next.next;
+            temp.next = node2;
+            node1.next = node2.next;
+            node2.next = node1;
+            // 重置temp
+            temp = node1;
         }
-        ListNode next = head.next;
-        head.next = next.next;
-        next.next = head;
-        swapPairs(head.next);
-        return next;
+        return vHead.next;
     }
 
 }

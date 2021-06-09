@@ -24,23 +24,27 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        // 1 3 5
-        // 2 4 6
-        ListNode preHead = new ListNode(-1);
-        ListNode pre = preHead;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                pre.next = l1;
-                l1 = l1.next;
-            } else {
-                pre.next = l2;
-                l2 = l2.next;
+        if (l1 == null) {
+            return l2;
+        } else if (l2 == null) {
+            return l1;
+        } else {
+            ListNode dummy = new ListNode();
+            ListNode cur = dummy;
+            while (l1 != null && l2 != null) {
+                if (l1.val <= l2.val) {
+                    cur.next = l1;
+                    l1 = l1.next;
+                } else {
+                    cur.next = l2;
+                    l2 = l2.next;
+                }
+                cur = cur.next;
             }
-            pre = pre.next;
+            // 直到其中一个为null退出
+            cur.next = l1 == null ? l2 : l1;
+            return dummy.next;
         }
-        // 合并完成之后最多还有一个未合并
-        pre.next = l1 == null ? l2 : l1;
-        return preHead.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

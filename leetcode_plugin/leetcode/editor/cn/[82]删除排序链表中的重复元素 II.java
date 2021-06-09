@@ -32,36 +32,22 @@ class Solution {
         if (head == null || head.next == null) {
             return head;
         }
-        if (head == null || head.next == null) {
-            return head;
-        }
-        // 相等需做去重处理
-        if (head.val == head.next.val) {
-            while (head != null && head.next != null && head.val == head.next.val) {
-                // 去重处理
-                head = head.next;
+        ListNode dummyNode = new ListNode(-1, head);
+        ListNode cur = dummyNode;
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == cur.next.next.val) {
+                // 记录重复值
+                int val = cur.next.val;
+                // 迭代比较重复值
+                while (cur.next != null && cur.next.val == val) {
+                    // 赋值下一个cur.next.next用作判断
+                    cur.next = cur.next.next;
+                }
+            } else {
+                cur = cur.next;
             }
-            // 处理完之后此时的head是重复元素，所以递归用下一个节点
-            return deleteDuplicates(head.next);
-        } else {
-            // 不相等则递归拿下一个节点
-            head.next = deleteDuplicates(head.next);
-            return head;
         }
-
-//        // 是否出现重复情况
-//        boolean isRe = false;
-//        // 处理重复节点
-//        while (head.next != null && head.val == head.next.val) {
-//            isRe = true;
-//            head = head.next;
-//        }
-//        // 退出循环时，head != head.next，head可能是出现过重复
-//        if (head.next != null) {
-//            head.next = deleteDuplicates(head.next);
-//        }
-//        // head出现过重复则返回下一个元素
-//        return isRe ? head.next : head;
+        return dummyNode.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

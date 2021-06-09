@@ -1,5 +1,7 @@
 package com.hzm.leetcode.链表;
 
+import java.util.concurrent.CyclicBarrier;
+
 /**
  * https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/
  *
@@ -10,29 +12,52 @@ package com.hzm.leetcode.链表;
 public class 反转链表 {
 
     public static void main(String[] args) {
-
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode5 = new ListNode(5);
-        listNode1.next = listNode2;
-        listNode2.next = listNode3;
-        listNode3.next = listNode4;
-        listNode4.next = listNode5;
-        out(listNode1);
-
-        System.out.println("===================");
-        ListNode listNode = reverseList2(listNode1);
-
-        out(listNode);
+        reverseList4(ListNode.toNode("[1,2,3,4,5]")).out();
     }
 
-    public static void out(ListNode head) {
-        if (head != null) {
-            System.out.println(head.val);
-            out(head.next);
+    /**
+     * 递归方式
+     *
+     * @param head
+     * @return com.hzm.leetcode.ListNode
+     * @author Hezeming
+     */
+    public static ListNode reverseList4(ListNode head) {
+        // 1 2 3 4 5
+        if (head == null || head.next == null) {
+            return head;
         }
+        // 1->2->3->4->5
+        // 最后一层head是4，返回的cur = head.next = 5
+        ListNode cur = reverseList4(head.next);
+        // 5->4
+        head.next.next = head;
+        // 切断4->5
+        head.next = null;
+        return cur;
+    }
+
+    /**
+     * 迭代方式
+     *
+     * @param head
+     * @return com.hzm.leetcode.ListNode
+     * @author Hezeming
+     */
+    public static ListNode reverseList3(ListNode head) {
+        // 1 2 3 4 5
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            // 取出当前节点的下一个节点
+            ListNode next = cur.next;
+            // 将当前节点的下一个节点指向pre
+            cur.next = pre;
+            // 重置cur，pre
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 
     /**

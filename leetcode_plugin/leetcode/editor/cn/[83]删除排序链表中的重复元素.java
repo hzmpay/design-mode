@@ -30,16 +30,14 @@ class Solution {
         if (head == null) {
             return null;
         }
-        // 定义双指针
-        ListNode pre = head;
-        ListNode cur = head.next;
-        while (cur != null) {
-            // 当前元素与前一个节点相等，将当前节点删除
-            if (pre.val == cur.val) {
-                pre.next = cur.next;
-                cur = cur.next;
+        ListNode cur = head;
+        while (cur.next != null) {
+            // 当前元素和下一个元素重复
+            if (cur.val == cur.next.val) {
+                // 删除下一个元素，不改变当前元素，因为下一个元素改变了，所有需要重新比较
+                cur.next = cur.next.next;
             } else {
-                pre = cur;
+                // 不重复则调到下一个元素
                 cur = cur.next;
             }
         }
