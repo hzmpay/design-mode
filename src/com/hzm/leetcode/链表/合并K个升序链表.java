@@ -11,9 +11,51 @@ public class 合并K个升序链表 {
 
     public static void main(String[] args) {
         ListNode[] listNodes = ListNode.toListNode("[[1,4,5],[1,3,4],[2,6]]");
-        ListNode listNode = mergeKLists3(listNodes);
+        ListNode listNode = mergeKLists4(listNodes);
 //        ListNode listNode = mergeTAwoListNode(listNodes[0], listNodes[1]);
         System.out.println(listNode);
+    }
+
+    public static ListNode mergeKLists4(ListNode[] lists) {
+        if (lists == null || lists.length == 0) {
+            return null;
+        }
+        return mergeKLists4(lists, 0, lists.length - 1);
+    }
+
+    public static ListNode mergeKLists4(ListNode[] lists, int l, int r) {
+        if (l > r) {
+            return null;
+        }
+        if (l == r) {
+            return lists[l];
+        }
+        int middle = (l + r) / 2;
+        return mergeTwoList(mergeKLists4(lists, l, middle), mergeKLists4(lists, middle + 1, r));
+    }
+
+    public static ListNode mergeTwoList(ListNode node1, ListNode node2) {
+        if (node1 == null) {
+            return node2;
+        } else if (node2 == null) {
+            return node1;
+        } else {
+            // 两个都不为空
+            ListNode dummy = new ListNode(-1);
+            ListNode cur = dummy;
+            while (node1 != null && node2 != null) {
+                if (node1.val <= node2.val) {
+                    cur.next = node1;
+                    node1 = node1.next;
+                } else {
+                    cur.next = node2;
+                    node2 = node2.next;
+                }
+                cur = cur.next;
+            }
+            cur.next = node1 == null ? node2 : node1;
+            return dummy.next;
+        }
     }
 
     /**

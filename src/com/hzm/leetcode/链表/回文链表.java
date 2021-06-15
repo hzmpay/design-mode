@@ -1,5 +1,6 @@
 package com.hzm.leetcode.链表;
 
+
 /**
  * https://leetcode-cn.com/problems/palindrome-linked-list/
  *
@@ -9,7 +10,68 @@ package com.hzm.leetcode.链表;
  */
 public class 回文链表 {
 
-    public boolean isPalindrome(ListNode head) {
+    public static void main(String[] args) throws Exception {
+//        ListNode listNode = ListNode.toNode("[1,2,3,2,1]");
+        ListNode listNode = ListNode.toNode("[1,2]");
+//        reverse2(listNode).out();
+        System.out.println(isPalindrome1(listNode));
+    }
+
+    public static boolean isPalindrome2(ListNode head) {
+        // 找到中间节点（偶数位中间前置节点）
+        ListNode slow = head;
+        ListNode quick = head;
+        // 边遍历边翻转前半部分
+        while (quick != null && quick.next != null) {
+            slow = slow.next;
+            quick = quick.next.next;
+        }
+        //
+        ListNode next = slow.next;
+        // 开始翻转
+        return false;
+    }
+
+    public static boolean isPalindrome1(ListNode head) {
+        // 找到中间节点（偶数位中间前置节点）
+        ListNode slow = head;
+        ListNode quick = head;
+        // 边遍历边翻转前半部分
+        while (quick != null && quick.next != null) {
+            slow = slow.next;
+            quick = quick.next.next;
+        }
+        // 开始翻转
+        ListNode newNode = reverse2(slow);
+        // 比较前半部分和后半部分是否相等
+        ListNode node1 = head;
+        ListNode node2 = newNode;
+        while (node2 != null) {
+            if (node1.val != node2.val) {
+                return false;
+            }
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        // 恢复链表
+        slow.next = reverse2(newNode).next;
+        System.out.println(head);
+        return true;
+    }
+
+    public static ListNode reverse2(ListNode node) {
+        ListNode pre = null;
+        while (node != null) {
+            ListNode next = node.next;
+            node.next = pre;
+            pre = node;
+            node = next;
+        }
+        return pre;
+    }
+
+
+    public static boolean isPalindrome(ListNode head) {
         if (head == null) {
             return true;
         }
@@ -43,7 +105,7 @@ public class 回文链表 {
         return result;
     }
 
-    public ListNode getCenter(ListNode head) {
+    public static ListNode getCenter(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
         while (fast != null && fast.next != null) {
@@ -53,7 +115,7 @@ public class 回文链表 {
         return slow;
     }
 
-    public ListNode reverse(ListNode head) {
+    public static ListNode reverse(ListNode head) {
         ListNode pre = null;
         while (head != null) {
             ListNode next = head.next;

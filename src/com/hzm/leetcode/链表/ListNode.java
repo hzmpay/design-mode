@@ -53,7 +53,7 @@ public class ListNode {
         ListNode listNode = new ListNode(Integer.parseInt(values[0]));
         ListNode pre = listNode;
         for (int j = 1; j < values.length; j++) {
-            pre.next = new ListNode(Integer.parseInt(values[j]));
+            pre.next = new ListNode(Integer.parseInt(values[j].trim()));
             pre = pre.next;
         }
         return listNode;
