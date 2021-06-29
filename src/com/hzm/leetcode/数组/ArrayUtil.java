@@ -24,6 +24,18 @@ public class ArrayUtil {
     }
 
     /**
+     * 根据字符串转二维数组
+     *
+     * @param str
+     * @return int[]
+     * @author Hezeming
+     */
+    public static Integer[][] toArray2(String str) {
+        String[] split = str.substring(2, str.length() - 2).split("],\\[");
+        return Arrays.stream(split).map(e -> Arrays.stream(e.split(",")).map(i -> Integer.valueOf(i)).toArray(Integer[]::new)).toArray(Integer[][]::new);
+    }
+
+    /**
      * 根据字符串转数组
      *
      * @param str
@@ -33,5 +45,17 @@ public class ArrayUtil {
     public static int[] toArrayInt(String str) {
         String[] split = str.substring(1, str.length() - 1).split(",");
         return Arrays.stream(split).mapToInt(e -> Integer.parseInt(e)).toArray();
+    }
+
+    /**
+     * 根据字符串转二维数组
+     *
+     * @param str
+     * @return int[]
+     * @author Hezeming
+     */
+    public static int[][] toArrayInt2(String str) {
+        String[] split = str.substring(2, str.length() - 2).split("],\\[");
+        return Arrays.stream(split).map(e -> Arrays.stream(e.split(",")).mapToInt(i -> Integer.valueOf(i)).toArray()).toArray(int[][]::new);
     }
 }

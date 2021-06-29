@@ -1,6 +1,5 @@
 package com.hzm.leetcode.链表;
 
-import com.hzm.leetcode.Base;
 
 /**
  * https://leetcode-cn.com/problems/sort-list/
