@@ -56,29 +56,59 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        Deque<TreeNode> stack = new LinkedList<>();
+        // 1.通过中序遍历
+//        return isValidBST1(root);
+        // 2.通过递归
+        return isValidBST2(root, null, null);
 
+    }
+
+    /**
+     * 递归
+     *
+     * @param root
+     * @return boolean
+     * @author Hezeming
+     */
+    public boolean isValidBST2(TreeNode root, Integer minVal, Integer maxVal) {
+        if (root == null) {
+            return true;
+        }
+        if (minVal != null && root.val <= minVal) {
+            return false;
+        }
+        if (maxVal != null && root.val >= maxVal) {
+            return false;
+        }
+        return isValidBST2(root.left, minVal, root.val) && isValidBST2(root.right, root.val, maxVal);
+    }
+
+    /**
+     * 中序遍历
+     *
+     * @param root
+     * @return boolean
+     * @author Hezeming
+     */
+    public boolean isValidBST1(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
         double preVal = -Double.MAX_VALUE;
-        while (root != null || !stack.isEmpty()) {
+        while (!stack.isEmpty() || root != null) {
             while (root != null) {
-                // 中间节点入栈
                 stack.push(root);
                 root = root.left;
             }
-            // 此时出栈为最左节点
             root = stack.pop();
-            if (root.val <= preVal) {
+            if (preVal >= root.val) {
                 return false;
             }
             preVal = root.val;
             root = root.right;
         }
         return true;
-    }
-
-    public boolean help(TreeNode root, Integer minVal, Integer maxVal) {
-        // 当前节点在左右节点范围内
-        // 当前节点的左节点
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -19,11 +19,39 @@ public class 验证二叉搜索树 {
     public static void main(String[] args) {
         Integer[] arr = {3, null, 30, 10, null, null, 15, null, 45};
         TreeNode root = TreeNode.createTree(arr);
-        System.out.println(isValidBST(root));
+        System.out.println(isValidBST1(root));
     }
 
     public static boolean isValidBST(TreeNode root) {
         return help(root, null, null);
+    }
+
+    /**
+     * 中序遍历
+     *
+     * @param root
+     * @return boolean
+     * @author Hezeming
+     */
+    public static boolean isValidBST1(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        double preVal = -Double.MAX_VALUE;
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (preVal > root.val) {
+                return false;
+            }
+            preVal = root.val;
+            root = root.right;
+        }
+        return true;
     }
 
     /**
